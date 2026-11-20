@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Platform</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f2f5;
+  color: #222;
+}
+
+header {
+  background: #1877f2;
+  color: white;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h2 {
+  font-size: 22px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  background: white;
+  padding: 14px;
+  position: sticky;
+  top: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #1877f2;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+.card {
+  background: white;
+  padding: 18px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #0001;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 8px 0;
+  font-size: 15px;
+}
+
+button {
+  background: #1877f2;
+  color: white;
+  border: none;
+  padding: 11px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.post {
+  line-height: 1.6;
+}
+
+.actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 15px;
+}
+
+.actions button {
+  flex: 1;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #777;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>Social Platform</h2>
+  <span>🔔</span>
+</header>
+
+<nav>
+  <a href="#">Home</a>
+  <a href="#videos">Videos</a>
+  <a href="#messages">Messages</a>
+  <a href="#profile">Profile</a>
+</nav>
+
+<div class="container">
+
+  <div class="card">
+    <h3>Create Post</h3>
+    <textarea id="postText"
+      placeholder="What's on your mind?"></textarea>
+    <button onclick="createPost()">Publish</button>
+  </div>
+
+  <div id="feed">
+    <div class="card post">
+      <h3>Welcome to Social Platform 👋</h3>
+      <p>Connect with friends, share posts and enjoy videos!</p>
+      <div class="actions">
+        <button onclick="likePost(this)">👍 Like</button>
+        <button onclick="commentPost()">💬 Comment</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="videos">
+    <h3>🎬 Videos</h3>
+    <p>Video section coming soon!</p>
+  </div>
+
+  <div class="card" id="messages">
+    <h3>💬 Messenger</h3>
+    <p>Messaging feature coming soon!</p>
+  </div>
+
+  <div class="card" id="profile">
+    <h3>👤 My Profile</h3>
+    <p>Welcome to your social profile.</p>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Social Platform
+</footer>
+
+<script>
+function createPost() {
+  const input = document.getElementById("postText");
+  const text = input.value.trim();
+
+  if (!text) {
+    alert("Please write something!");
+    return;
+  }
+
+  const post = document.createElement("div");
+  post.className = "card post";
+
+  const heading = document.createElement("h3");
+  heading.textContent = "New Post";
+
+  const paragraph = document.createElement("p");
+  paragraph.textContent = text;
+
+  const actions = document.createElement("div");
+  actions.className = "actions";
+
+  const like = document.createElement("button");
+  like.textContent = "👍 Like";
+  like.onclick = function() {
+    likePost(like);
+  };
+
+  const comment = document.createElement("button");
+  comment.textContent = "💬 Comment";
+  comment.onclick = commentPost;
+
+  actions.append(like, comment);
+  post.append(heading, paragraph, actions);
+
+  document.getElementById("feed").prepend(post);
+  input.value = "";
+}
+
+function likePost(button) {
+  button.textContent =
+    button.textContent.includes("Liked")
+    ? "👍 Like"
+    : "❤️ Liked";
+}
+
+function commentPost() {
+  const comment = prompt("Write your comment:");
+
+  if (comment && comment.trim()) {
+    alert("Comment added: " + comment);
+  }
+}
+</script>
+
+</body>
+</html>
